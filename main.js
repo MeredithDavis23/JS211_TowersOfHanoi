@@ -30,27 +30,66 @@ const printStacks = () => {
 }
 
 // Next, what do you think this function should do?
-const movePiece = () => {
-  // Your code here
+const movePiece = (startStack, endStack) => {
+  //if move isLegal, pop piece and push it onto the other piece
+  return stacks[endStack].push(stacks[startStack].pop())
+}
 
+const isValid = (startStack, endStack) => {
+    if(startStack === 'a' && (endStack === 'b' || endStack === 'c')) {
+      return true
+    }
+    else if (startStack === 'b' && (endStack === 'a' || endStack === 'c')) {
+      return true 
+    }
+    else if (startStack === 'c' && (endStack === 'a' || endStack === 'b')) {
+      return true 
+    }
+    else {
+      console.log("Invalid input, enter a,b,c")
+      return false 
+    }
 }
 
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
-const isLegal = () => {
+const isLegal = (startStack, endStack) => {
   // Your code here
+ 
+  if (isValid(startStack, endStack)) {
+  
 
+  let moveFromArray = stacks[startStack][stacks[startStack].length - 1]
+  
+  let moveToArray = stacks[endStack][stacks[endStack].length - 1]
+
+  if (moveFromArray < moveToArray || stacks[endStack].length === 0) {
+    return true;
+  } 
+  else {
+    console.log("invalid input")
+    return false
+  }
+  }
 }
 
 // What is a win in Towers of Hanoi? When should this function run?
 const checkForWin = () => {
   // Your code here
-
+  if(stacks.b.length === 4) {
+    console.log("You Won!")
+    return true
+  }
+ else {
+    return false
+ }
 }
 
 // When is this function called? What should it do with its argument?
 const towersOfHanoi = (startStack, endStack) => {
-  // Your code here
-
+  if (isLegal(startStack, endStack)) {
+    movePiece(startStack, endStack);
+    checkForWin();
+  }
 }
 
 const getPrompt = () => {
@@ -98,6 +137,25 @@ if (typeof describe === 'function') {
       assert.equal(checkForWin(), true);
       stacks = { a: [1], b: [4, 3, 2], c: [] };
       assert.equal(checkForWin(), false);
+    });
+  });
+
+  describe('#isValid()', () => {
+    it('should not allow illegal input', () => {
+      stacks = {
+        a: [4, 3, 2],
+        b: [1],
+        c: []
+      };
+      assert.equal(isValid('r', 'j'), false);
+    });
+    it('should allow a legal input', () => {
+      stacks = {
+        a: [4, 3, 2, 1],
+        b: [],
+        c: []
+      };
+      assert.equal(isValid('a', 'c'), true);
     });
   });
 
