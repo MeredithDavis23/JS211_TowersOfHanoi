@@ -1,3 +1,19 @@
+Code Plan
+
+1. Create array for each tower to assign blocks to. 
+2. Number pieces 1-4 (1 being smallest).
+3. Create a function to pop a piece from the array to push it to the next array.
+4. Create a function that checks if the blocks are in order of size so that the move is possible.
+5. Create a way to check that the user has put in the correct input.
+6. Correct a function to check for win and notify user 
+
+
+
+
+
+
+
+
 # JS211_Towers of Hanoi[![CircleCI](https://circleci.com/gh/AustinCodingAcademy/javascript-workbook/tree/gh-pages.svg?style=svg)](https://circleci.com/gh/AustinCodingAcademy/javascript-workbook/tree/gh-pages)
 
 ![](http://en.gravatar.com/userimage/107370100/a08594145564536138dfaaf072c7b241.png)
